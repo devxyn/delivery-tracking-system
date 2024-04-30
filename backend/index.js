@@ -1,9 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 import trackingRoutes from './routes/trackingRoutes.js';
 
 const app = express();
 const port = 3000;
+
+try {
+  await mongoose.connect('mongodb://localhost:27017');
+  console.log('Connected to MongoDB');
+} catch (error) {
+  console.error('MongoDB connection error:', error);
+}
 
 app.use(bodyParser.json());
 app.use('/api/tracking', trackingRoutes);
