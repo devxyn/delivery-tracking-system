@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import trackingRoutes from './routes/trackingRoutes.js';
 
 const app = express();
@@ -14,6 +15,7 @@ try {
 }
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/api/tracking', trackingRoutes);
 
 app.listen(port, () => {
