@@ -35,6 +35,15 @@ const App = () => {
     }
   };
 
+  const refreshStatus = async (trackingNumber) => {
+    try {
+      await axios.put(`http://localhost:3000/api/tracking/${trackingNumber}/refresh`);
+      fetchTrackingNumbers();
+    } catch (error) {
+      console.error('Error refreshing tracking status:', error);
+    }
+  };
+
   return (
     <div className='container mx-auto px-10 py-10 md:py-20'>
       <h1 className='text-3xl font-semibold mb-10'>Delivery Tracking System</h1>
@@ -79,8 +88,9 @@ const App = () => {
           </div>
         </div>
         <button
-          className='text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-6 py-2'
-          onClick={addTrackingNumber}>
+          className='text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-6 py-2 cursor-pointer'
+          onClick={addTrackingNumber}
+          disabled={!newTrackingNumber && !newCourier}>
           Add
         </button>
       </div>
@@ -92,8 +102,15 @@ const App = () => {
           {trackingNumbers
             .filter((tracking) => tracking.status !== 'Delivered')
             .map((tracking) => (
-              <li key={tracking._id}>
-                {tracking.trackingNumber} - {tracking.courier}
+              <li className='flex justify-between' key={tracking._id}>
+                <span>
+                  {tracking.trackingNumber} - {tracking.courier}
+                </span>
+                <button
+                  className='text-blue-600 hover:text-blue-700'
+                  onClick={() => refreshStatus(tracking.trackingNumber)}>
+                  Refresh
+                </button>
               </li>
             ))}
         </ul>
