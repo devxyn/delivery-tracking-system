@@ -15,7 +15,7 @@ This is a web application for tracking deliveries. It allows users to add tracki
    npm install
    ```
 
-### Backkend
+### Backend
 
 1. Navigate to the `backend` directory.
    ```bash
@@ -40,7 +40,7 @@ This is a web application for tracking deliveries. It allows users to add tracki
    ```
 3. Access the frontend application at http://localhost:5173 in your web browser.
 
-### Backkend
+### Backend
 
 1. Navigate to the `backend` directory.
    ```bash
